@@ -1,0 +1,32 @@
+
+  <div class="col-md-12">
+    <div class="well">
+      <div class="media-left">
+        <img ng-src="{{$ctrl.post.image_url}}" class="media-object" height=150px>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          {{$ctrl.post.title}}
+          |
+          <a><i ng-click="$ctrl.increaseVote($ctrl.post,1)" class="glyphicon glyphicon-arrow-up"></i></a>
+          <a><i ng-click="$ctrl.decreaseVote($ctrl.post,-1)" class="glyphicon glyphicon-arrow-down"></i></a>
+          {{$ctrl.post.vote_count}}
+        </h4>
+        <div>
+          <em>Posted by: {{$ctrl.post.author}}</em>
+          (<a ui-sref="edit({id:$ctrl.post.id})" class="">edit</a>)
+        </div>
+        <p>
+          {{$ctrl.post.body}}
+        </p>
+        <div>
+          <span am-time-ago="$ctrl.post.created_at"></span>
+          | <comments post="$ctrl.post"></comments>
+        </div>
+
+        <div ng-click="$ctrl.deletePost($ctrl.post)" class="pull-right">
+          <p><a class="btn btn-danger">Delete Post</a></p>
+        </div>
+      </div>
+    </div>
+  </div>

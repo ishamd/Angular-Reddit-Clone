@@ -1,0 +1,73 @@
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Reddit Clone Part Deux</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <div ng-click="$ctrl.showPostForm = !$ctrl.showPostForm" class="pull-right">
+    <p><a class="btn btn-info">New Post</a></p>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active">
+      <input ng-model="titleFilter" type="search" class="form-control input-sm search-form" placeholder="Filter"><br>
+    </li>
+    <div class="form-inline">
+      <label for="sort"></label>
+      <a><select ng-model="$ctrl.propertyToOrderBy" class="form-control" id="sort">
+        <option value="-vote_count"><a>Sort By Votes</a></option>
+        <option value="-created_at"><a>Sort By Date</a></option>
+        <option value="title"><a>Sort By Title</a></option>
+      </select></a>
+    </div>
+  </ul>
+
+  <div ng-if="$ctrl.showPostForm" class="row">
+    <div class="col-md-8">
+
+      <form name="$ctrl.postForm" novalidate ng-submit="$ctrl.addPost($ctrl.post)" class="form">
+        <div class="form-group" ng-class="{'has-error' : $ctrl.postForm.title.$invalid && $ctrl.postForm.title.$touched}">
+          <label for="title">Title</label>
+          <input name="title" ng-model="$ctrl.post.title" id="title" class="form-control" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.postForm.body.$invalid && $ctrl.postForm.body.$touched}">
+          <label for="body">Body</label>
+          <textarea name="body" ng-model="$ctrl.post.body" id="body" class="form-control" required></textarea>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.postForm.author.$invalid && $ctrl.postForm.author.$touched}">
+          <label for="author">Author</label>
+          <input name="author" ng-model="$ctrl.post.author" id="author" class="form-control" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.postForm.image_url.$invalid && $ctrl.postForm.image_url.$touched}">
+          <label for="image-url">Image URL</label>
+          <input name="image_url" ng-model="$ctrl.post.image_url" id="image-url" class="form-control" required>
+        </div><br>
+        <div class="form-group">
+          <button ng-disabled="$ctrl.postForm.$invalid" type="submit" class="btn btn-primary">
+            Create Post
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div ng-repeat="post in $ctrl.posts | orderBy:$ctrl.propertyToOrderBy | filter: {title: titleFilter}" class="row">
+    <individual post="post"></individual>
+  </div>
+
+</main>

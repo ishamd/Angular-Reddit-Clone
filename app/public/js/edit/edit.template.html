@@ -1,0 +1,51 @@
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Reddit Clone Part Deux</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <h1>{{$ctrl.stringified.title}}</h1>
+
+  <div ng-if="$ctrl.showEditForm === $ctrl.post.id" class="row">
+    <div class="col-md-8">
+      <form name="$ctrl.editForm" novalidate ng-submit="$ctrl.editPost($ctrl.stringified)" class="form">
+        <div class="form-group" ng-class="{'has-error' : $ctrl.editForm.title.$invalid && $ctrl.editForm.title.$touched}">
+          <label for="title">Title</label>
+          <input name="title" ng-model="$ctrl.stringified.title" id="title" class="form-control" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.editForm.body.$invalid && $ctrl.editForm.body.$touched}">
+          <label for="body">Body</label>
+          <textarea name="body" ng-model="$ctrl.stringified.body" ng-value="$ctrl.post.body" id="body" class="form-control" required></textarea>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.editForm.author.$invalid && $ctrl.editForm.author.$touched}">
+          <label for="author">Author</label>
+          <input name="author" ng-model="$ctrl.stringified.author" ng-value="$ctrl.post.author" id="author" class="form-control" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : $ctrl.editForm.image_url.$invalid && $ctrl.editForm.image_url.$touched}">
+          <label for="image-url">Image URL</label>
+          <input name="image_url" ng-model="$ctrl.stringified.image_url" ng-value="$ctrl.post.image_url" id="image-url" class="form-control" required>
+        </div><br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+              Update Post
+            </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>

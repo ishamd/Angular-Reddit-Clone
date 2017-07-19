@@ -1,0 +1,23 @@
+<i class="glyphicon glyphicon-comment"></i>
+<a ng-click="visibleComments = !visibleComments">
+  <ng-pluralize count="$ctrl.post.comments.length" when="{1: '1 Comment', 'other': '{{ $ctrl.post.comments.length }} Comments'}"></ng-pluralize>
+</a>
+
+<div ng-if="visibleComments" class="row">
+  <div class="col-md-offset-1">
+    <hr>
+
+    <p ng-repeat="comment in $ctrl.post.comments track by $index">
+
+      {{comment.content}} (<em><span am-time-ago="comment.created_at"></span></em>)
+    </p>
+    <form name="$ctrl.commentForm" ng-submit="$ctrl.addComment($ctrl.post)" class="form-inline">
+      <div class="form-group">
+        <input ng-model="$ctrl.post.content" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+</div>
