@@ -16,3 +16,11 @@ Web application designed for users to post, discuss and rate content. The goal o
 ## Deployed Site
 
 https://ishamd-angular-reddit-clone.herokuapp.com/
+
+## Views
+
+### Landing Page
+
+Users can scroll through, search, filter, vote or comment on existing content.
+
+![alt text](./images/home.png "Angular Reddit Clone Landing Page")
